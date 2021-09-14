@@ -1,8 +1,6 @@
 terraform {
   backend "s3" {
     bucket = "ecs-serh-bucket"
-    key    = "prod/task_definitions/terraform.tfstate"
-    region = "us-east-1"
   }
 }
 provider "aws" {
