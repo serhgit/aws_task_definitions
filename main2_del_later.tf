@@ -1,15 +1,5 @@
-terraform {
-  backend "s3" {
-    bucket = "ecs-serh-bucket"
-  }
-}
-provider "aws" {
-  region  = var.aws_region
-  profile = var.aws_profile
-}
-
-resource "aws_ecs_task_definition" "apache_php_rds" {
-  family                   = "${var.environment}_${var.cluster}_apache_php_rds"
+resource "aws_ecs_task_definition" "apache_php_rds2" {
+  family                   = "${var.environment}_${var.cluster}_apache_php_rds2"
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
   execution_role_arn       = "arn:aws:iam::288946686376:role/${var.environment}_${var.cluster}_ecs_tasks_instance_role"
@@ -25,7 +15,7 @@ resource "aws_ecs_task_definition" "apache_php_rds" {
       portMappings = [
         {
           containerPort = 80
-          hostPort      = 80
+          hostPort      = 90
         }
       ]
       secrets = [ 
@@ -42,7 +32,7 @@ resource "aws_ecs_task_definition" "apache_php_rds" {
   ])
 
   tags = {
-    Name        = "${var.environment}_${var.cluster}_apache_php_rds"
+    Name        = "${var.environment}_${var.cluster}_apache_php_rds2"
     Environment = "${var.environment}"
     Cluster     = "${var.cluster}"
   }
